@@ -21,7 +21,7 @@ First define your application id and secret in `config/initializers/devise.rb`.
 Configuration options can be passed as the last parameter here as key/value pairs.
 
 ```ruby
-config.omniauth :sch, ENV['AUTHSCH_CLIENT'], ENV['AUTHSCH_KEY'], scope: ENV['AUTHSCH_SCOPES']
+config.omniauth :authsch, ENV['AUTHSCH_CLIENT'], ENV['AUTHSCH_KEY'], scope: ENV['AUTHSCH_SCOPES']
 ```
 
 Then add the following to `config/routes.rb` so the callback routes are defined.
@@ -40,7 +40,7 @@ Then make sure your callbacks controller is setup in `app/controllers/users/omni
 
 ```ruby
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def sch
+  def authsch
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.from_omniauth(request.env['omniauth.auth'])
 
@@ -48,7 +48,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Auth.sch'
       sign_in_and_redirect @user, event: :authentication
     else
-      redirect_to new_user_registration_url, alert: @user.errors.full_messages.join('\n')
+      redirect_to root_path, alert: @user.errors.full_messages.join('\n')
     end
   end
 end
