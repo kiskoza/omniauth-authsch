@@ -1,3 +1,5 @@
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
 Metrics/LineLength:
   Enabled: false
 Style/FileName:
