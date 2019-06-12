@@ -18,13 +18,13 @@ Then `bundle install`.
 
 First define your application id and secret in `config/initializers/devise.rb`.
 
-Configuration options can be passed as the last parameter here as key/value pairs.
+Configuration options can be passed as the last parameter here as key/value pairs. Note that these values come from the ENV, so you need to add them there.
 
 ```ruby
 config.omniauth :authsch, ENV['AUTHSCH_CLIENT'], ENV['AUTHSCH_KEY'], scope: ENV['AUTHSCH_SCOPES']
 ```
 
-Then add the following to `config/routes.rb` so the callback routes are defined.
+Then add the following to `config/routes.rb` so the callback routes are defined. This way the callback url will be `/users/auth/authsch/callback`.
 
 ```ruby
 devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
